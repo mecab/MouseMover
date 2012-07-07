@@ -1,0 +1,2 @@
+C-g: Up(20), Left(20), Wait(1000), Right(20)
+W-C-b: Left(20)
