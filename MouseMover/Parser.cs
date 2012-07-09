@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace MouseMover {
     static class Parser {
-        private static Regex COMMAND_REGEX = new Regex(@"(\w+)\((\d+)\)", RegexOptions.Compiled);
+        private static Regex COMMAND_REGEX = new Regex(@"(\w+)\((-?\d+)?\)", RegexOptions.Compiled);
 
         public static MouseActionsEntry Parse(string line) {
             try {
@@ -84,8 +84,9 @@ namespace MouseMover {
                 }
                 var m = COMMAND_REGEX.Match(command);
                 var action = m.Groups[1].Value;
-                var param = int.Parse(m.Groups[2].Value);
-
+                int param;
+                int.TryParse(m.Groups[2].Value, out param);
+                
                 switch (action) {
                     case "Up":
                         actions.Add(new MouseUp(param));
@@ -101,6 +102,15 @@ namespace MouseMover {
                         break;
                     case "Wait":
                         actions.Add(new Sleep(param));
+                        break;
+                    case "Wheel":
+                        actions.Add(new MouseWheel(param));
+                        break;
+                    case "LeftClick":
+                        actions.Add(new LeftClick());
+                        break;
+                    case "RightClick":
+                        actions.Add(new RightClick());
                         break;
                     default:
                         throw new Exception();

@@ -86,6 +86,42 @@ namespace MouseMover {
         }
     }
 
+    public sealed class LeftClick : IMouseAction {
+        public string CommandText {
+            get { return "LeftClick()"; }
+        }
+
+        public void DoAction() {
+            MouseController.LeftClick();
+        }
+    }
+
+    public sealed class RightClick : IMouseAction {
+        public string CommandText {
+            get { return "RightClick()"; }
+        }
+
+        public void DoAction() {
+            MouseController.RightClick();
+        }
+    }
+
+    public sealed class MouseWheel : IMouseAction {
+        public int WheelAmount { get; set; } 
+
+        public string CommandText {
+            get { return "MouseWheel(" + WheelAmount + ")"; }
+        }
+
+        public MouseWheel(int amount) {
+            WheelAmount = amount;
+        }
+
+        public void DoAction() {
+            MouseController.Wheel(WheelAmount);
+        }
+    }
+
     public sealed class Sleep : IMouseAction {
         public int SleepTimeInMillisecond { get; set; }
 

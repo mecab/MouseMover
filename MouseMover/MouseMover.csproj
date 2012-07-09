@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="KeyboardHook.cs" />
+    <Compile Include="MouseController.cs" />
     <Compile Include="Trigger.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
